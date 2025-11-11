@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: books-hub
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: admin
+    password: admin
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true

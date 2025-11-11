@@ -1,0 +1,34 @@
+package com.substitutive.booksHub.infrastructure.persistence.adapters;
+
+import com.substitutive.booksHub.domain.entities.Reservation;
+import com.substitutive.booksHub.domain.repositories.ReservationRepository;
+import com.substitutive.booksHub.infrastructure.persistence.mappers.ReservationMapper;
+import com.substitutive.booksHub.infrastructure.persistence.repositories.ReservationJpaRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+@RequiredArgsConstructor
+public class ReservationJpaRepositoryImpl implements ReservationRepository {
+
+    private final ReservationJpaRepository reservationJpaRepository;
+
+    @Override
+    public Reservation reservation(Reservation reservation) {
+        var reservationEntity = ReservationMapper.toEntity(reservation);
+        var savedReservation = reservationJpaRepository.save(reservationEntity);
+        return ReservationMapper.toDomain(savedReservation);
+    }
+
+    @Override
+    public List<Reservation> findAllByUser(Long userId) {
+        return reservationJpaRepository.findAllByUser(userId).stream().map(ReservationMapper::toDomain).toList();
+    }
+
+    @Override
+    public List<Reservation> findAllByBook(Long bookId) {
+        return reservationJpaRepository.findAllByBook(bookId).stream().map(ReservationMapper::toDomain).toList();
+    }
+}

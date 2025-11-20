@@ -23,6 +23,14 @@ public class User {
         this.userType = userType;
     }
 
+    public User(String name, CPF cpf, Email email, Telephone telephone, UserType userType) {
+        this.name = name;
+        this.cpf = cpf;
+        this.email = email;
+        this.telephone = telephone;
+        this.userType = userType;
+    }
+
     public Long getId() {
         return id;
     }

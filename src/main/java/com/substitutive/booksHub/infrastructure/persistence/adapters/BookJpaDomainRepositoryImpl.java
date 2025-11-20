@@ -2,7 +2,7 @@ package com.substitutive.booksHub.infrastructure.persistence.adapters;
 
 import com.substitutive.booksHub.domain.entities.Book;
 import com.substitutive.booksHub.domain.exceptions.BookNotFoundException;
-import com.substitutive.booksHub.domain.repositories.BookRepository;
+import com.substitutive.booksHub.domain.repositories.BookDomainRepository;
 import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
 import com.substitutive.booksHub.infrastructure.persistence.mappers.BookMapper;
 import com.substitutive.booksHub.infrastructure.persistence.repositories.BookJpaRepository;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class BookJpaRepositoryImpl implements BookRepository {
+public class BookJpaDomainRepositoryImpl implements BookDomainRepository {
 
     private final BookJpaRepository bookJpaRepository;
 

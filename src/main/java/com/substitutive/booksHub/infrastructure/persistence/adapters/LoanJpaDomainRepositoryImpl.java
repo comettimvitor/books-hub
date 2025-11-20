@@ -2,7 +2,7 @@ package com.substitutive.booksHub.infrastructure.persistence.adapters;
 
 import com.substitutive.booksHub.domain.entities.Loan;
 import com.substitutive.booksHub.domain.exceptions.LoanNotFoundException;
-import com.substitutive.booksHub.domain.repositories.LoanRepository;
+import com.substitutive.booksHub.domain.repositories.LoanDomainRepository;
 import com.substitutive.booksHub.infrastructure.persistence.mappers.LoanMapper;
 import com.substitutive.booksHub.infrastructure.persistence.repositories.LoanJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +13,12 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class LoanJpaRepositoryImpl implements LoanRepository {
+public class LoanJpaDomainRepositoryImpl implements LoanDomainRepository {
 
     private final LoanJpaRepository loanJpaRepository;
 
     @Override
-    public Loan loan(Loan loan) {
+    public Loan save(Loan loan) {
         var loanEntity = LoanMapper.toEntity(loan);
         var savedLoan = loanJpaRepository.save(loanEntity);
         return LoanMapper.toDomain(savedLoan);
@@ -36,12 +36,12 @@ public class LoanJpaRepositoryImpl implements LoanRepository {
 
     @Override
     public List<Loan> findAllByUserId(Long userId) {
-        return loanJpaRepository.findAllByUserId(userId).stream().map(LoanMapper::toDomain).toList();
+        return loanJpaRepository.findAllByUserEntity_Id(userId).stream().map(LoanMapper::toDomain).toList();
     }
 
     @Override
     public List<Loan> findAllByBookId(Long bookId) {
-        return loanJpaRepository.findAllByBookId(bookId).stream().map(LoanMapper::toDomain).toList();
+        return loanJpaRepository.findAllByBooks_Id(bookId).stream().map(LoanMapper::toDomain).toList();
     }
 
     @Override

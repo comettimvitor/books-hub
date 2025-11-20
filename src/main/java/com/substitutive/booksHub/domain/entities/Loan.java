@@ -34,6 +34,15 @@ public class Loan {
         this.status = status;
     }
 
+    public Loan(List<Book> books, User user, LocalDate loanDate, LocalDate returnDate, LoanStatus status) {
+        this.books = books;
+        this.user = user;
+        this.loanDate = loanDate;
+        this.dueDate = loanDate.plusDays(LOAN_PERIOD_DAYS);
+        this.returnDate = returnDate;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }

@@ -6,7 +6,7 @@ import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNu
 import java.util.List;
 import java.util.Optional;
 
-public interface BookRepository {
+public interface BookDomainRepository {
     Book save(Book book);
     Optional<Book> findById(Long id);
     Optional<Book> findByBookTitle(String title);

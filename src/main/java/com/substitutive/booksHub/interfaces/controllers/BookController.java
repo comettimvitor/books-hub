@@ -5,7 +5,6 @@ import com.substitutive.booksHub.application.dtos.bookdto.BookResponseDto;
 import com.substitutive.booksHub.application.usecases.bookusecase.*;
 import com.substitutive.booksHub.domain.entities.Book;
 import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
-import com.substitutive.booksHub.interfaces.requests.CreateBookRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +27,8 @@ public class BookController {
     private final UpdateBookUseCase updateBookUseCase;
 
     @PostMapping("/create")
-    public ResponseEntity<BookResponseDto> create(@RequestBody CreateBookRequest request) {
-        BookRequestDto requestDto = request.toDTO();
+    public ResponseEntity<BookResponseDto> create(@RequestBody BookRequestDto request) {
+        BookRequestDto requestDto = request;
         BookResponseDto responseDto = createBookUseCase.execute(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }

@@ -3,7 +3,7 @@ package com.substitutive.booksHub.application.usecases.bookusecase;
 import com.substitutive.booksHub.application.dtos.bookdto.BookRequestDto;
 import com.substitutive.booksHub.application.dtos.bookdto.BookResponseDto;
 import com.substitutive.booksHub.domain.entities.Book;
-import com.substitutive.booksHub.domain.repositories.BookRepository;
+import com.substitutive.booksHub.domain.repositories.BookDomainRepository;
 import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CreateBookUseCase {
-    private final BookRepository bookRepository;
+    private final BookDomainRepository bookDomainRepository;
 
     public BookResponseDto execute(BookRequestDto request) {
         Book book = new Book(
@@ -21,7 +21,7 @@ public class CreateBookUseCase {
                 new InternationalStandardBookNumber(request.isbn())
         );
 
-        Book saved = bookRepository.save(book);
+        Book saved = bookDomainRepository.save(book);
 
         return new BookResponseDto(
                 saved.getId(),

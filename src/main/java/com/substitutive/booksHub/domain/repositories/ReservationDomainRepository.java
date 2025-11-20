@@ -4,8 +4,8 @@ import com.substitutive.booksHub.domain.entities.Reservation;
 
 import java.util.List;
 
-public interface ReservationRepository {
-    Reservation reservation(Reservation reservation);
+public interface ReservationDomainRepository {
+    Reservation save(Reservation reservation);
     List<Reservation> findAllByUser(Long userId);
     List<Reservation> findAllByBook(Long bookId);
 }

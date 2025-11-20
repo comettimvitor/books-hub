@@ -2,7 +2,7 @@ package com.substitutive.booksHub.infrastructure.persistence.adapters;
 
 import com.substitutive.booksHub.domain.entities.User;
 import com.substitutive.booksHub.domain.exceptions.UserNotFoundException;
-import com.substitutive.booksHub.domain.repositories.UserRepository;
+import com.substitutive.booksHub.domain.repositories.UserDomainRepository;
 import com.substitutive.booksHub.infrastructure.persistence.mappers.UserMapper;
 import com.substitutive.booksHub.infrastructure.persistence.repositories.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class UserJpaRepositoryImpl implements UserRepository {
+public class UserJpaDomainRepositoryImpl implements UserDomainRepository {
 
     private final UserJpaRepository userJpaRepository;
 
@@ -31,7 +31,7 @@ public class UserJpaRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findByUserName(String name) {
-        return userJpaRepository.findByUserName(name).map(UserMapper::toDomain);
+        return userJpaRepository.findUserByName(name).map(UserMapper::toDomain);
     }
 
     @Override

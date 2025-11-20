@@ -1,6 +1,5 @@
 package com.substitutive.booksHub.application.usecases.userusecase;
 
-import com.substitutive.booksHub.application.dtos.userdto.UserRequestDto;
 import com.substitutive.booksHub.application.dtos.userdto.UserResponseDto;
 import com.substitutive.booksHub.domain.entities.User;
 import com.substitutive.booksHub.domain.repositories.UserDomainRepository;

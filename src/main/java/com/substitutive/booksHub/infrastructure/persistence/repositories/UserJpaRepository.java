@@ -1,10 +1,14 @@
 package com.substitutive.booksHub.infrastructure.persistence.repositories;
 
+import com.substitutive.booksHub.domain.entities.User;
+import com.substitutive.booksHub.domain.valueobjects.CPF;
 import com.substitutive.booksHub.infrastructure.persistence.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
-    Optional<UserEntity> findUserByName(String name);
+    List<UserEntity> findUserByName(String name);
+    boolean existsByCpf(CPF cpf);
 }

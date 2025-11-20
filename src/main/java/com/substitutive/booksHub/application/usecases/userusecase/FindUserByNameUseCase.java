@@ -6,12 +6,14 @@ import com.substitutive.booksHub.domain.repositories.UserDomainRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class FindUserByUsernameUseCase {
+public class FindUserByNameUseCase {
     public final UserDomainRepository userDomainRepository;
 
-    public UserResponseDto execute(String name) {
-        return userDomainRepository.findByUserName(name).map(UserResponseDto::fromDomain).orElseThrow(() -> new UserNotFoundException("User not found with username: " + name));
+    public List<UserResponseDto> execute(String name) {
+        return userDomainRepository.findUserByName(name).stream().map(UserResponseDto::fromDomain).toList();
     }
 }

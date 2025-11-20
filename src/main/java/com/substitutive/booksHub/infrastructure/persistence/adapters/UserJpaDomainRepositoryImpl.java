@@ -3,6 +3,7 @@ package com.substitutive.booksHub.infrastructure.persistence.adapters;
 import com.substitutive.booksHub.domain.entities.User;
 import com.substitutive.booksHub.domain.exceptions.UserNotFoundException;
 import com.substitutive.booksHub.domain.repositories.UserDomainRepository;
+import com.substitutive.booksHub.domain.valueobjects.CPF;
 import com.substitutive.booksHub.infrastructure.persistence.mappers.UserMapper;
 import com.substitutive.booksHub.infrastructure.persistence.repositories.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,8 @@ public class UserJpaDomainRepositoryImpl implements UserDomainRepository {
     }
 
     @Override
-    public Optional<User> findByUserName(String name) {
-        return userJpaRepository.findUserByName(name).map(UserMapper::toDomain);
+    public List<User> findUserByName(String name) {
+        return userJpaRepository.findUserByName(name).stream().map(UserMapper::toDomain).toList();
     }
 
     @Override
@@ -57,5 +58,10 @@ public class UserJpaDomainRepositoryImpl implements UserDomainRepository {
     @Override
     public void delete(Long id) {
         userJpaRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean existsByCpf(CPF cpf) {
+        return userJpaRepository.existsByCpf(cpf);
     }
 }

@@ -19,7 +19,7 @@ public class UserController {
     private final DeleteUserUseCase deleteUserUseCase;
     private final FindAllUsersUseCase findAllUsersUseCase;
     private final FindUserByIdUseCase findUserByIdUseCase;
-    private final FindUserByUsernameUseCase findUserByUsernameUseCase;
+    private final FindUserByNameUseCase findUserByNameUseCase;
     private final UpdateUserUseCase updateUserUseCase;
 
     @PostMapping("/create")
@@ -40,9 +40,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
-    @GetMapping("/username")
-    public ResponseEntity<UserResponseDto> findByUsername(@RequestParam String name) {
-        UserResponseDto responseDto = findUserByUsernameUseCase.execute(name);
+    @GetMapping("/name")
+    public ResponseEntity<List<UserResponseDto>> findUserByName(@RequestParam String name) {
+        List<UserResponseDto> responseDto = findUserByNameUseCase.execute(name);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 

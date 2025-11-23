@@ -60,6 +60,11 @@ public class BookJpaDomainRepositoryImpl implements BookDomainRepository {
     }
 
     @Override
+    public List<Book> findAllById(Iterable<Long> ids) {
+        return bookJpaRepository.findAllById(ids).stream().map(BookMapper::toDomain).toList();
+    }
+
+    @Override
     public Book update(Long id, Book book) {
         var entity = bookJpaRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException("Book not found for update."));

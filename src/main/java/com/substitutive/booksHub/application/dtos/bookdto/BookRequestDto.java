@@ -4,5 +4,4 @@ public record BookRequestDto(
         String title,
         String author,
         String isbn
-) {
-}
+) {}

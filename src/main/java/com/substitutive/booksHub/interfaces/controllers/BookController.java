@@ -58,19 +58,19 @@ public class BookController {
     }
 
     @GetMapping("/author")
-    public ResponseEntity<List<BookResponseDto>> findByAuthor(@RequestBody String author) {
+    public ResponseEntity<List<BookResponseDto>> findByAuthor(@RequestParam String author) {
         List<BookResponseDto> responseDto = findBookByAuthorUseCase.execute(author);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @GetMapping("/isbn")
-    public ResponseEntity<BookResponseDto> findByIsbn(@RequestBody InternationalStandardBookNumber isbn) {
+    public ResponseEntity<BookResponseDto> findByIsbn(@RequestParam InternationalStandardBookNumber isbn) {
         BookResponseDto responseDto = findBookByIsbnUseCase.execute(isbn);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @GetMapping("/title")
-    public ResponseEntity<BookResponseDto> findByTitle(@RequestBody String title) {
+    public ResponseEntity<BookResponseDto> findByTitle(@RequestParam String title) {
         BookResponseDto responseDto = findBookByTitleUseCase.execute(title);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }

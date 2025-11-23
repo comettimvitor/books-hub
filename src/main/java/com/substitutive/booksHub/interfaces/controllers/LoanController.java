@@ -21,7 +21,7 @@ public class LoanController {
     private final FindAllLoansByUserUseCase findAllLoansByUserUseCase;
     private final FindAllLoansUseCase findAllLoansUseCase;
     private final FindLoanByIdUseCase findLoanByIdUseCase;
-    private final UpdateLoanUseCase updateLoanUseCase;
+    private final ReturnLoanUseCase returnLoanUseCase;
 
     @PostMapping("/create")
     public ResponseEntity<LoanResponseDto> create(@RequestBody LoanRequestDto request) {
@@ -59,9 +59,9 @@ public class LoanController {
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<LoanResponseDto> update(@PathVariable("id") Long id, @RequestBody Loan loan) {
-        LoanResponseDto dto = updateLoanUseCase.execute(id, loan);
+    @PutMapping("/return/{id}")
+    public ResponseEntity<LoanResponseDto> update(@PathVariable("id") Long id) {
+        LoanResponseDto dto = returnLoanUseCase.execute(id);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 

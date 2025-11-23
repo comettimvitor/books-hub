@@ -15,8 +15,10 @@ public class ReservationMapper {
 
     public static Reservation toDomain(ReservationEntity reservationEntity) {
         return new Reservation(
+                reservationEntity.getId(),
                 UserMapper.toDomain(reservationEntity.getUserEntity()),
-                BookMapper.toDomain(reservationEntity.getBookEntity())
+                BookMapper.toDomain(reservationEntity.getBookEntity()),
+                reservationEntity.getReservationDate()
         );
     }
 }

@@ -1,13 +1,8 @@
 package com.substitutive.booksHub.domain.entities;
 
 import com.substitutive.booksHub.domain.enums.BookStatus;
-import com.substitutive.booksHub.domain.exceptions.BorrowedBookException;
+import com.substitutive.booksHub.domain.exceptions.ReservedBookException;
 import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 public class Book {
 
@@ -17,7 +12,6 @@ public class Book {
     private InternationalStandardBookNumber isbn;
     private BookStatus status;
     private boolean isAvailable;
-    private List<Reservation> reservations = new ArrayList<>();
 
     public Book(Long id, String title, String author, InternationalStandardBookNumber isbn) {
         this.id = id;
@@ -28,44 +22,22 @@ public class Book {
         this.isAvailable = true;
     }
 
-    public void reserve(User user) {
-        if(this.isAvailable) {
-            throw new IllegalStateException("This book is available.");
+    public void reservation() {
+        if(BookStatus.RESERVED.equals(status)) {
+            throw new ReservedBookException("This book is already reserved");
         }
 
-        if(reservations.stream().anyMatch(reservation -> reservation.getUser().equals(user))) {
-            throw new IllegalStateException("User is already in the reservation queue.");
+        isAvailable = false;
+        status = BookStatus.RESERVED;
+    }
+
+    public void loan() {
+        if (!this.isAvailable) {
+            throw new IllegalStateException("This book is not available.");
         }
 
-        reservations.add(new Reservation(user, this));
-    }
-
-    public Optional<User> nextInQueue() {
-        return reservations.isEmpty() ? Optional.empty() : Optional.of(reservations.get(0).getUser());
-    }
-
-    public void removerFirstReservation() {
-        if(!reservations.isEmpty()) {
-            reservations.remove(0);
-        }
-    }
-
-    public List<Reservation> getReservations() {
-        return Collections.unmodifiableList(reservations);
-    }
-
-    public void markAsBorrowed() {
-        if(this.status == BookStatus.BORROWED) {
-            throw new BorrowedBookException("This book have already been borrowed.");
-        }
-
-        this.status = BookStatus.BORROWED;
-        this.isAvailable = false;
-    }
-
-    public void markAsAvailable() {
-        this.status = BookStatus.AVAILABLE;
-        this.isAvailable = true;
+        isAvailable = false;
+        status = BookStatus.BORROWED;
     }
 
     public Long getId() {

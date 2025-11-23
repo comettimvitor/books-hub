@@ -11,6 +11,6 @@ public interface LoanDomainRepository {
     List<Loan> findAll();
     List<Loan> findAllByUserId(Long userId);
     List<Loan> findAllByBookId(Long bookId);
-    Loan update(Long id, Loan loan);
+    Loan update(Loan loan);
     void delete(Long id);
 }

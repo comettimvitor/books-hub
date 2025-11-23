@@ -45,12 +45,8 @@ public class LoanJpaDomainRepositoryImpl implements LoanDomainRepository {
     }
 
     @Override
-    public Loan update(Long id, Loan loan) {
-        var entity = loanJpaRepository.findById(id)
-                .orElseThrow(() -> new LoanNotFoundException("Loan not found for update."));
-
-        entity.setLoanDate(loan.getLoanDate());
-
+    public Loan update(Loan loan) {
+        var entity = LoanMapper.toEntity(loan);
         var saved = loanJpaRepository.save(entity);
         return LoanMapper.toDomain(saved);
     }

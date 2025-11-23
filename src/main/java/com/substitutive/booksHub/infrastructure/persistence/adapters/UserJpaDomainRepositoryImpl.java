@@ -57,6 +57,12 @@ public class UserJpaDomainRepositoryImpl implements UserDomainRepository {
 
     @Override
     public void delete(Long id) {
+        var user = userJpaRepository.findById(id);
+
+        if(user.isEmpty()){
+            throw new UserNotFoundException("User not found with id: " + id);
+        }
+
         userJpaRepository.deleteById(id);
     }
 

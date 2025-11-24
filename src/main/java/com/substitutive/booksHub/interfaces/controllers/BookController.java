@@ -25,6 +25,7 @@ public class BookController {
     private final FindBookByIsbnUseCase findBookByIsbnUseCase;
     private final FindBookByTitleUseCase findBookByTitleUseCase;
     private final UpdateBookUseCase updateBookUseCase;
+    private final EndReservationUseCase endReservationUseCase;
 
     @PostMapping("/create")
     public ResponseEntity<BookResponseDto> create(@RequestBody BookRequestDto request) {
@@ -76,8 +77,14 @@ public class BookController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<BookResponseDto> update(@RequestParam("id") Long id, @RequestBody Book book) {
+    public ResponseEntity<BookResponseDto> update(@PathVariable("id") Long id, @RequestBody Book book) {
         BookResponseDto responseDto = updateBookUseCase.execute(id, book);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    }
+
+    @PutMapping("/end-reservation/reservation-id/{id}")
+    public ResponseEntity<BookResponseDto> endReservation(@PathVariable("id") Long id) {
+        BookResponseDto responseDto = endReservationUseCase.execute(id);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

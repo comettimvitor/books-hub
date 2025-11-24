@@ -6,6 +6,7 @@ import com.substitutive.booksHub.domain.entities.Book;
 import com.substitutive.booksHub.domain.entities.Loan;
 import com.substitutive.booksHub.domain.entities.User;
 import com.substitutive.booksHub.domain.enums.LoanStatus;
+import com.substitutive.booksHub.domain.exceptions.BookNotAvailableException;
 import com.substitutive.booksHub.domain.exceptions.BookNotFoundException;
 import com.substitutive.booksHub.domain.exceptions.UserNotFoundException;
 import com.substitutive.booksHub.domain.repositories.BookDomainRepository;
@@ -28,18 +29,26 @@ public class CreateLoanUseCase {
     public LoanResponseDto execute(LoanRequestDto request) {
         User user = userDomainRepository.findById(request.userId()).orElseThrow(() -> new UserNotFoundException("User not found."));
         List<Book> books = bookDomainRepository.findAllById(request.bookIds());
+
         if (books.isEmpty()) {
             throw new BookNotFoundException("No books found");
         }
 
-        for(Book book : books){
+        books.forEach(book -> {
+            if (!book.isAvailable()) {
+                throw new BookNotAvailableException(
+                        "Book is not available."
+                );
+            }
+        });
+
+        books.forEach(book -> {
             book.loan();
             bookDomainRepository.save(book);
-        }
+        });
 
-        Loan loan = new Loan(books, user, LoanStatus.ON_GOING);
+        Loan loan = new Loan(books, user);
         Loan savedLoan = loanDomainRepository.save(loan);
-
         return LoanResponseDto.fromDomain(savedLoan);
     }
 }

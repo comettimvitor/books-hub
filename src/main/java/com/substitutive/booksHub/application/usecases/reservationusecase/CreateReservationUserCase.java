@@ -25,12 +25,15 @@ public class CreateReservationUserCase {
     public ReservationResponseDto execute(ReservationRequestDto request) {
         User user = userDomainRepository.findById(request.userId()).orElseThrow(() -> new UserNotFoundException("User not found."));
         Book book = bookDomainRepository.findById(request.bookId()).orElseThrow(() -> new BookNotFoundException("Book not found."));
-        book.reservation();
-        bookDomainRepository.save(book);
 
-        Reservation reservation = new Reservation(user, book);
-        Reservation savedReservation = reservationDomainRepository.save(reservation);
-
-        return ReservationResponseDto.fromDomain(savedReservation);
+        if(book.isAvailable()) {
+            book.reservation();
+            bookDomainRepository.save(book);
+            Reservation reservation = new Reservation(user, book);
+            Reservation savedReservation = reservationDomainRepository.save(reservation);
+            return ReservationResponseDto.fromDomain(savedReservation);
+        } else {
+            throw new BookNotFoundException("Book is not available.");
+        }
     }
 }

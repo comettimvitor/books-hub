@@ -23,12 +23,17 @@ public class Book {
     }
 
     public void reservation() {
-        if(BookStatus.RESERVED.equals(status)) {
+        if(!this.isAvailable) {
             throw new ReservedBookException("This book is already reserved");
         }
 
         isAvailable = false;
         status = BookStatus.RESERVED;
+    }
+
+    public void endTransaction() {
+        isAvailable = true;
+        status = BookStatus.AVAILABLE;
     }
 
     public void loan() {

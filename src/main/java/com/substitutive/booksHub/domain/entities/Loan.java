@@ -1,6 +1,7 @@
 package com.substitutive.booksHub.domain.entities;
 
 import com.substitutive.booksHub.domain.enums.LoanStatus;
+import com.substitutive.booksHub.domain.exceptions.BookNotAvailableException;
 import com.substitutive.booksHub.domain.exceptions.BookNotFoundException;
 import com.substitutive.booksHub.domain.exceptions.UserNotFoundException;
 
@@ -31,15 +32,19 @@ public class Loan {
         this.loanDate = loanDate;
         this.dueDate = loanDate.plusDays(LOAN_PERIOD_DAYS);
         this.returnDate = returnDate;
-        this.status = status;
+        this.status = LoanStatus.ON_GOING;
     }
 
-    public Loan(List<Book> books, User user, LoanStatus status) {
+    public Loan(List<Book> books, User user) {
+        books.forEach(book -> {
+            if(!book.isAvailable()) throw new BookNotAvailableException("Some books are not available.");
+        });
+
         this.books = books;
         this.user = user;
         this.loanDate = LocalDate.now();
         this.dueDate = loanDate.plusDays(LOAN_PERIOD_DAYS);
-        this.status = status;
+        this.status = LoanStatus.ON_GOING;
     }
 
     public Long getId() {

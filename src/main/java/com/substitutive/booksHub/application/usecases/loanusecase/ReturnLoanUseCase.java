@@ -1,6 +1,5 @@
 package com.substitutive.booksHub.application.usecases.loanusecase;
 
-import com.substitutive.booksHub.application.dtos.loandto.LoanRequestDto;
 import com.substitutive.booksHub.application.dtos.loandto.LoanResponseDto;
 import com.substitutive.booksHub.domain.entities.Loan;
 import com.substitutive.booksHub.domain.exceptions.LoanNotFoundException;

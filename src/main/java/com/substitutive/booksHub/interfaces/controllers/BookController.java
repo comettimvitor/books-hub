@@ -3,6 +3,7 @@ package com.substitutive.booksHub.interfaces.controllers;
 import com.substitutive.booksHub.application.dtos.bookdto.BookRequestDto;
 import com.substitutive.booksHub.application.dtos.bookdto.BookResponseDto;
 import com.substitutive.booksHub.application.usecases.bookusecase.*;
+import com.substitutive.booksHub.application.usecases.reservationusecase.EndReservationUseCase;
 import com.substitutive.booksHub.domain.entities.Book;
 import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,8 @@ public class BookController {
     private final FindBookByAuthorUseCase findBookByAuthorUseCase;
     private final FindBookByIsbnUseCase findBookByIsbnUseCase;
     private final FindBookByTitleUseCase findBookByTitleUseCase;
+    private final FindAllBooksByLoanId findAllBooksByLoanId;
     private final UpdateBookUseCase updateBookUseCase;
-    private final EndReservationUseCase endReservationUseCase;
 
     @PostMapping("/create")
     public ResponseEntity<BookResponseDto> create(@RequestBody BookRequestDto request) {
@@ -35,13 +36,13 @@ public class BookController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> delete(@RequestParam("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         deleteBookUseCase.execute(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookResponseDto> findById(@RequestParam("id") Long id) {
+    public ResponseEntity<BookResponseDto> findById(@PathVariable("id") Long id) {
         BookResponseDto responseDto = findBookByIdUseCase.execute(id);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
@@ -76,15 +77,15 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<BookResponseDto> update(@PathVariable("id") Long id, @RequestBody Book book) {
-        BookResponseDto responseDto = updateBookUseCase.execute(id, book);
+    @GetMapping("/all-books/loan/{id}")
+    public ResponseEntity<List<BookResponseDto>> findAllBooksByLoanId(@PathVariable("id") Long loanId) {
+        List<BookResponseDto> responseDto = findAllBooksByLoanId.execute(loanId);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
-    @PutMapping("/end-reservation/reservation-id/{id}")
-    public ResponseEntity<BookResponseDto> endReservation(@PathVariable("id") Long id) {
-        BookResponseDto responseDto = endReservationUseCase.execute(id);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<BookResponseDto> update(@PathVariable("id") Long id, @RequestBody Book book) {
+        BookResponseDto responseDto = updateBookUseCase.execute(id, book);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

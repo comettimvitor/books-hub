@@ -21,7 +21,7 @@ public class LoanEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "loan_books",
             joinColumns = @JoinColumn(name = "loan_id"),
@@ -29,7 +29,7 @@ public class LoanEntity {
     )
     private List<BookEntity> books;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity userEntity;
     private LocalDate loanDate;

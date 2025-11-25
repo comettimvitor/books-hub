@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.substitutive.booksHub.domain.valueobjects.CPF;
 import com.substitutive.booksHub.domain.valueobjects.Email;
+import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
 import com.substitutive.booksHub.domain.valueobjects.Telephone;
 import com.substitutive.booksHub.infrastructure.serializers.*;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,8 @@ public class ValueObjectsModule extends SimpleModule {
 
         addDeserializer(Telephone.class, new TelephoneDeserializer());
         addSerializer(Telephone.class, new TelephoneSerializer());
+
+        addDeserializer(InternationalStandardBookNumber.class, new IsbnDeserializer());
+        addSerializer(InternationalStandardBookNumber.class, new IsbnSerializer());
     }
 }

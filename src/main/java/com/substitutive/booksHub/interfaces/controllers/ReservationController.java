@@ -1,8 +1,10 @@
 package com.substitutive.booksHub.interfaces.controllers;
 
+import com.substitutive.booksHub.application.dtos.bookdto.BookResponseDto;
 import com.substitutive.booksHub.application.dtos.reservationdto.ReservationRequestDto;
 import com.substitutive.booksHub.application.dtos.reservationdto.ReservationResponseDto;
 import com.substitutive.booksHub.application.usecases.reservationusecase.CreateReservationUserCase;
+import com.substitutive.booksHub.application.usecases.reservationusecase.EndReservationUseCase;
 import com.substitutive.booksHub.application.usecases.reservationusecase.FindAllReservationsByBookUseCase;
 import com.substitutive.booksHub.application.usecases.reservationusecase.FindAllReservationsByUserUseCase;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ public class ReservationController {
     private final CreateReservationUserCase createReservationUserCase;
     private final FindAllReservationsByUserUseCase findAllReservationsByUserUseCase;
     private final FindAllReservationsByBookUseCase findAllReservationsByBookUseCase;
+    private final EndReservationUseCase endReservationUseCase;
 
     @PostMapping("/create")
     public ResponseEntity<ReservationResponseDto> create(@RequestBody ReservationRequestDto request) {
@@ -36,5 +39,11 @@ public class ReservationController {
     public ResponseEntity<List<ReservationResponseDto>> findAllByUserId(@PathVariable("id") Long id) {
         List<ReservationResponseDto> dto = findAllReservationsByUserUseCase.execute(id);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PutMapping("/end-reservation/reservation-id/{id}")
+    public ResponseEntity<BookResponseDto> endReservation(@PathVariable("id") Long id) {
+        BookResponseDto responseDto = endReservationUseCase.execute(id);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

@@ -15,6 +15,7 @@ public interface BookDomainRepository {
     Optional<Book> findByIsbn(InternationalStandardBookNumber isbn);
     List<Book> findAll();
     List<Book> findAllById(Iterable<Long> ids);
+    List<Book> findAllBooksByLoanId(Long loanId);
     Book update(Long id, Book book);
     void delete(Long id);
 }

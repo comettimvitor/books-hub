@@ -1,4 +1,4 @@
-package com.substitutive.booksHub.application.usecases.bookusecase;
+package com.substitutive.booksHub.application.usecases.reservationusecase;
 
 import com.substitutive.booksHub.application.dtos.bookdto.BookResponseDto;
 import com.substitutive.booksHub.domain.entities.Book;

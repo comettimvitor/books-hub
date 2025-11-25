@@ -36,10 +36,6 @@ public class Loan {
     }
 
     public Loan(List<Book> books, User user) {
-        books.forEach(book -> {
-            if(!book.isAvailable()) throw new BookNotAvailableException("Some books are not available.");
-        });
-
         this.books = books;
         this.user = user;
         this.loanDate = LocalDate.now();
@@ -96,10 +92,6 @@ public class Loan {
     }
 
     public void returnBook(LocalDate returnDate) {
-        if(this.returnDate != null) {
-            throw new IllegalStateException("This book have already been returned.");
-        }
-
         this.returnDate = returnDate;
         this.status = returnDate.isAfter(dueDate) ? LoanStatus.LATE : LoanStatus.RETURNED;
     }

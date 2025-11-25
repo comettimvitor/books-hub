@@ -49,7 +49,7 @@ public class BookJpaDomainRepositoryImpl implements BookDomainRepository {
 
     @Override
     public Optional<Book> findByIsbn(InternationalStandardBookNumber isbn) {
-        return bookJpaRepository.findByTitle(isbn.toString())
+        return bookJpaRepository.findByIsbn(isbn.toString())
                 .map(BookMapper::toDomain);
     }
 
@@ -65,6 +65,11 @@ public class BookJpaDomainRepositoryImpl implements BookDomainRepository {
     }
 
     @Override
+    public List<Book> findAllBooksByLoanId(Long loanId) {
+        return bookJpaRepository.findAllBooksByLoanId(loanId).stream().map(BookMapper::toDomain).toList();
+    }
+
+    @Override
     public Book update(Long id, Book book) {
         var entity = bookJpaRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException("Book not found for update."));
@@ -73,6 +78,7 @@ public class BookJpaDomainRepositoryImpl implements BookDomainRepository {
         entity.setAuthor(book.getAuthor());
         entity.setIsbn(book.getIsbn().toString());
         entity.setStatus(book.getStatus());
+        entity.setAvailable(book.isAvailable());
 
         var saved = bookJpaRepository.save(entity);
         return BookMapper.toDomain(saved);

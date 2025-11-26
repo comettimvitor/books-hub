@@ -33,8 +33,7 @@ public class LoanMapper {
                         .collect(Collectors.toList()),
                 UserMapper.toDomain(loanEntity.getUserEntity()),
                 loanEntity.getLoanDate(),
-                loanEntity.getReturnDate(),
-                loanEntity.getStatus()
+                loanEntity.getReturnDate()
         );
     }
 }

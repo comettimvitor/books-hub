@@ -2,6 +2,8 @@ package com.substitutive.booksHub.infrastructure.persistence.adapters;
 
 import com.substitutive.booksHub.domain.entities.Book;
 import com.substitutive.booksHub.domain.exceptions.BookNotFoundException;
+import com.substitutive.booksHub.domain.models.BorrowedBooks;
+import com.substitutive.booksHub.domain.models.MostBorrowedBook;
 import com.substitutive.booksHub.domain.repositories.BookDomainRepository;
 import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
 import com.substitutive.booksHub.infrastructure.persistence.mappers.BookMapper;
@@ -70,6 +72,11 @@ public class BookJpaDomainRepositoryImpl implements BookDomainRepository {
     }
 
     @Override
+    public Optional<Book> findBookByReservationId(Long reservationId) {
+        return bookJpaRepository.findBookByReservationId(reservationId).map(BookMapper::toDomain);
+    }
+
+    @Override
     public Book update(Long id, Book book) {
         var entity = bookJpaRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException("Book not found for update."));
@@ -87,5 +94,35 @@ public class BookJpaDomainRepositoryImpl implements BookDomainRepository {
     @Override
     public void delete(Long id) {
         bookJpaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<MostBorrowedBook> mostBorrowedBooks() {
+        return bookJpaRepository.mostBorrowedBooks()
+                .stream()
+                .map(projection -> new MostBorrowedBook(
+                                projection.getId(),
+                                projection.getTitle(),
+                                projection.getAuthor(),
+                                projection.getIsbn(),
+                                projection.getTotalLoans()
+                        )
+                )
+                .toList();
+    }
+
+    @Override
+    public List<BorrowedBooks> borrowedBooks() {
+        return bookJpaRepository.borrowedBooks()
+                .stream()
+                .map(projection -> new BorrowedBooks(
+                                projection.getId(),
+                                projection.getTitle(),
+                                projection.getAuthor(),
+                                projection.getIsbn(),
+                                projection.getDueDate()
+                        )
+                )
+                .toList();
     }
 }

@@ -23,11 +23,14 @@ public class ReturnLoanUseCase {
     @Transactional
     public LoanResponseDto execute(Long id) {
         List<Book> books = bookDomainRepository.findAllBooksByLoanId(id);
-        books.forEach(Book::endTransaction);
+        books.forEach(book -> {
+            book.endTransaction();
+            bookDomainRepository.update(book.getId(), book);
+        });
 
         Loan loan = loanDomainRepository.findById(id).orElseThrow(() -> new LoanNotFoundException("Loan not found."));
-        if(LoanStatus.ON_GOING.equals(loan.getStatus())) {
-            loan.returnBook(LocalDate.now());
+        if (LoanStatus.ON_GOING.equals(loan.getStatus())) {
+            loan.returnBook();
         }
 
         Loan savedLoan = loanDomainRepository.returnLoan(loan);

@@ -28,7 +28,7 @@ public class ReservationJpaDomainRepositoryImpl implements ReservationDomainRepo
     }
 
     @Override
-    public List<Reservation> findAllByBook(Long bookId) {
+    public List<Reservation> findAllByBookEntity_Id(Long bookId) {
         return reservationJpaRepository.findAllByBookEntity_Id(bookId).stream().map(ReservationMapper::toDomain).toList();
     }
 }

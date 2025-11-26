@@ -13,6 +13,6 @@ public class FindAllReservationsByBookUseCase {
     private final ReservationDomainRepository reservationDomainRepository;
 
     public List<ReservationResponseDto> execute(Long bookId) {
-        return reservationDomainRepository.findAllByBook(bookId).stream().map(ReservationResponseDto::fromDomain).toList();
+        return reservationDomainRepository.findAllByBookEntity_Id(bookId).stream().map(ReservationResponseDto::fromDomain).toList();
     }
 }

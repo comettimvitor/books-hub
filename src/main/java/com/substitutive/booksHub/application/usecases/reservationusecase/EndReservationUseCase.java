@@ -15,7 +15,7 @@ public class EndReservationUseCase {
 
     @Transactional
     public BookResponseDto execute(Long id) {
-        Book book = bookDomainRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found."));
+        Book book = bookDomainRepository.findBookByReservationId(id).orElseThrow(() -> new BookNotFoundException("Book not found."));
         book.endTransaction();
         bookDomainRepository.save(book);
         return BookResponseDto.fromDomain(book);

@@ -8,6 +8,7 @@ import com.substitutive.booksHub.infrastructure.persistence.repositories.LoanJpa
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,11 +47,8 @@ public class LoanJpaDomainRepositoryImpl implements LoanDomainRepository {
 
     @Override
     public Loan returnLoan(Loan loan) {
-        var entity = loanJpaRepository.findById(loan.getId()).orElseThrow(() -> new LoanNotFoundException("Loan not found."));
-        entity.setStatus(loan.getStatus());
-        entity.setReturnDate(loan.getReturnDate());
-
-        var savedEntity = loanJpaRepository.save(entity);
+        var loanEntity = LoanMapper.toEntity(loan);
+        var savedEntity = loanJpaRepository.save(loanEntity);
         return LoanMapper.toDomain(savedEntity);
     }
 

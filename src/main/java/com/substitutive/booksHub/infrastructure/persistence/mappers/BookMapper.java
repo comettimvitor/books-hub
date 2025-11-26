@@ -22,7 +22,9 @@ public class BookMapper {
                 bookEntity.getId(),
                 bookEntity.getTitle(),
                 bookEntity.getAuthor(),
-                new InternationalStandardBookNumber(bookEntity.getIsbn())
+                new InternationalStandardBookNumber(bookEntity.getIsbn()),
+                bookEntity.getStatus(),
+                bookEntity.isAvailable()
         );
     }
 }

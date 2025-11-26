@@ -18,8 +18,15 @@ public class Book {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
-        this.status = BookStatus.AVAILABLE;
-        this.isAvailable = true;
+    }
+
+    public Book(Long id, String title, String author, InternationalStandardBookNumber isbn, BookStatus bookStatus, boolean isAvailable) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.status = bookStatus;
+        this.isAvailable = isAvailable;
     }
 
     public void reservation() {

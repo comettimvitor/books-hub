@@ -3,6 +3,7 @@ package com.substitutive.booksHub.application.usecases.bookusecase;
 import com.substitutive.booksHub.application.dtos.bookdto.BookRequestDto;
 import com.substitutive.booksHub.application.dtos.bookdto.BookResponseDto;
 import com.substitutive.booksHub.domain.entities.Book;
+import com.substitutive.booksHub.domain.enums.BookStatus;
 import com.substitutive.booksHub.domain.exceptions.IsbnAlreadyExistsException;
 import com.substitutive.booksHub.domain.repositories.BookDomainRepository;
 import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
@@ -26,7 +27,9 @@ public class CreateBookUseCase {
                 null,
                 request.title(),
                 request.author(),
-                isbn
+                isbn,
+                BookStatus.AVAILABLE,
+                true
         );
 
         Book saved = bookDomainRepository.save(book);

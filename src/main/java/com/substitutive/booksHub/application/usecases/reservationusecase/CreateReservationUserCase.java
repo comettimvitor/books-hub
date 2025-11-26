@@ -1,10 +1,12 @@
 package com.substitutive.booksHub.application.usecases.reservationusecase;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
 import com.substitutive.booksHub.application.dtos.reservationdto.ReservationRequestDto;
 import com.substitutive.booksHub.application.dtos.reservationdto.ReservationResponseDto;
 import com.substitutive.booksHub.domain.entities.Book;
 import com.substitutive.booksHub.domain.entities.Reservation;
 import com.substitutive.booksHub.domain.entities.User;
+import com.substitutive.booksHub.domain.exceptions.BookNotAvailableException;
 import com.substitutive.booksHub.domain.exceptions.BookNotFoundException;
 import com.substitutive.booksHub.domain.exceptions.UserNotFoundException;
 import com.substitutive.booksHub.domain.repositories.BookDomainRepository;
@@ -26,14 +28,18 @@ public class CreateReservationUserCase {
         User user = userDomainRepository.findById(request.userId()).orElseThrow(() -> new UserNotFoundException("User not found."));
         Book book = bookDomainRepository.findById(request.bookId()).orElseThrow(() -> new BookNotFoundException("Book not found."));
 
-        if(book.isAvailable()) {
-            book.reservation();
-            bookDomainRepository.save(book);
+        Reservation savedReservation;
+
+        if (book.isAvailable()) {
             Reservation reservation = new Reservation(user, book);
-            Reservation savedReservation = reservationDomainRepository.save(reservation);
-            return ReservationResponseDto.fromDomain(savedReservation);
+            savedReservation = reservationDomainRepository.save(reservation);
         } else {
-            throw new BookNotFoundException("Book is not available.");
+            throw new BookNotAvailableException("This book is not available.");
         }
+
+        book.reservation();
+        bookDomainRepository.save(book);
+
+        return ReservationResponseDto.fromDomain(savedReservation);
     }
 }

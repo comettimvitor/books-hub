@@ -21,7 +21,7 @@ public class Loan {
 
     private static final int LOAN_PERIOD_DAYS = 7;
 
-    public Loan(Long id, List<Book> book, User user, LocalDate loanDate, LocalDate returnDate, LoanStatus status) {
+    public Loan(Long id, List<Book> book, User user, LocalDate loanDate, LocalDate returnDate) {
         if (user == null) throw new UserNotFoundException("User must be informed.");
         if (book == null) throw new BookNotFoundException("Book must be informed.");
         if (loanDate == null) throw new IllegalArgumentException("Loan Date must be informed.");
@@ -91,8 +91,8 @@ public class Loan {
         this.status = status;
     }
 
-    public void returnBook(LocalDate returnDate) {
-        this.returnDate = returnDate;
+    public void returnBook() {
+        this.returnDate = LocalDate.now();
         this.status = returnDate.isAfter(dueDate) ? LoanStatus.LATE : LoanStatus.RETURNED;
     }
 

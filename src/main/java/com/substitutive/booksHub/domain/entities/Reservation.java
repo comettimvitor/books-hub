@@ -16,7 +16,6 @@ public class Reservation {
     public Reservation(Long id, User user, Book book, LocalDate reservationDate) {
         if (user == null) throw new UserNotFoundException("User must be informed.");
         if (book == null) throw new BookNotFoundException("Book must be informed.");
-        if (!book.isAvailable()) throw new BookNotAvailableException("This book is not available.");
 
         this.id = id;
         this.user = user;
@@ -27,7 +26,6 @@ public class Reservation {
     public Reservation(User user, Book book) {
         if (user == null) throw new UserNotFoundException("User must be informed.");
         if (book == null) throw new BookNotFoundException("Book must be informed");
-        if (!book.isAvailable()) throw new BookNotAvailableException("This book is not available.");
 
         this.user = user;
         this.book = book;

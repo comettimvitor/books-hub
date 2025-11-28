@@ -1,17 +1,26 @@
 package com.substitutive.booksHub.infrastructure.persistence.adapters;
 
 import com.substitutive.booksHub.domain.entities.Loan;
-import com.substitutive.booksHub.domain.exceptions.LoanNotFoundException;
 import com.substitutive.booksHub.domain.repositories.LoanDomainRepository;
 import com.substitutive.booksHub.infrastructure.persistence.mappers.LoanMapper;
 import com.substitutive.booksHub.infrastructure.persistence.repositories.LoanJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementação do {@link LoanDomainRepository} utilizando Spring Data JPA.
+ * <p>
+ * Esta classe funciona como um adaptador entre o domínio e a infraestrutura,
+ * convertendo objetos do domínio para entidades JPA e vice-versa através do {@link LoanMapper}.
+ * </p>
+ *
+ * <p>
+ * Responsável por persistir, consultar, atualizar e remover empréstimos (Loan)
+ * no banco de dados, seguindo os contratos definidos pelo domínio.
+ * </p>
+ */
 @Repository
 @RequiredArgsConstructor
 public class LoanJpaDomainRepositoryImpl implements LoanDomainRepository {

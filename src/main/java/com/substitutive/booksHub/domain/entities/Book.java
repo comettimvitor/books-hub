@@ -4,6 +4,14 @@ import com.substitutive.booksHub.domain.enums.BookStatus;
 import com.substitutive.booksHub.domain.exceptions.ReservedBookException;
 import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
 
+/**
+ * Representa um livro cadastrado no sistema Book Hub.
+ * Contém informações principais como título, autor, gênero e ano de publicação.
+ * <p>
+ * Esta classe é usada em operações de cadastro, listagem,
+ * atualização e remoção de livros.
+ */
+
 public class Book {
 
     private Long id;
@@ -29,6 +37,9 @@ public class Book {
         this.isAvailable = isAvailable;
     }
 
+    /**
+     * Este método faz a reserva do livro.
+     */
     public void reservation() {
         if(!this.isAvailable) {
             throw new ReservedBookException("This book is already reserved");
@@ -38,11 +49,17 @@ public class Book {
         status = BookStatus.RESERVED;
     }
 
+    /**
+     * Este método termina uma reserva ou um empréstimo de um livro.
+     */
     public void endTransaction() {
         isAvailable = true;
         status = BookStatus.AVAILABLE;
     }
 
+    /**
+     * Este método prepara um livro para um emprétimo.
+     */
     public void loan() {
         if (!this.isAvailable) {
             throw new IllegalStateException("This book is not available.");

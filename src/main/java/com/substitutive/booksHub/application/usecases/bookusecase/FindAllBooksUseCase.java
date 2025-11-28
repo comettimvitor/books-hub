@@ -6,7 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Caso de uso responsável por buscar todos os livros cadastrados no sistema.
+ *
+ * <p>Retorna uma lista completa de livros, independentemente do status de disponibilidade.
+ */
 @Service
 @RequiredArgsConstructor
 public class FindAllBooksUseCase {

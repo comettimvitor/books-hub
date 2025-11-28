@@ -1,13 +1,21 @@
 package com.substitutive.booksHub.domain.entities;
 
 import com.substitutive.booksHub.domain.enums.LoanStatus;
-import com.substitutive.booksHub.domain.exceptions.BookNotAvailableException;
 import com.substitutive.booksHub.domain.exceptions.BookNotFoundException;
 import com.substitutive.booksHub.domain.exceptions.UserNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+
+/**
+ * Representa um emprestimo de um livro no sistema Book Hub.
+ * Contém informações principais como a lista de livros emprestados, a data do emprestimo, data de vencimento do emprestimo
+ * e data de retorno dos livros.
+ * <p>
+ * Esta classe é usada em operações de cadastro, listagem,
+ * atualização e retorno de emprestimos.
+ */
 
 public class Loan {
 
@@ -91,6 +99,9 @@ public class Loan {
         this.status = status;
     }
 
+    /**
+     * Metodo para marcar data de retorno de livros devolvidos e status do emprestimo.
+     */
     public void returnBook() {
         this.returnDate = LocalDate.now();
         this.status = returnDate.isAfter(dueDate) ? LoanStatus.LATE : LoanStatus.RETURNED;

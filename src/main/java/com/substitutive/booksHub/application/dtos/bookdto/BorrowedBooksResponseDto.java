@@ -1,10 +1,13 @@
 package com.substitutive.booksHub.application.dtos.bookdto;
 
 import com.substitutive.booksHub.domain.models.BorrowedBooks;
-import com.substitutive.booksHub.domain.models.MostBorrowedBook;
 
 import java.util.Date;
-
+/**
+ * DTO de resposta para livros que foram emprestados.
+ *
+ * <p>Contém informações sobre o livro emprestado, incluindo a data de devolução prevista.
+ */
 public record BorrowedBooksResponseDto(
         Long id,
         String title,

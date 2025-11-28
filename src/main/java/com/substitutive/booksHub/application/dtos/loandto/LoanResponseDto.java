@@ -8,6 +8,13 @@ import com.substitutive.booksHub.domain.enums.LoanStatus;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * DTO de resposta para empréstimos.
+ *
+ * <p>Contém informações sobre o empréstimo, incluindo os livros emprestados,
+ * o usuário que realizou o empréstimo, datas do empréstimo e devolução,
+ * e o status do empréstimo.
+ */
 public record LoanResponseDto(
         Long id,
         List<BookResponseDto> books,

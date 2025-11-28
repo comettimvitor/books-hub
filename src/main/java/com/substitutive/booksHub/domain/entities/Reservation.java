@@ -1,11 +1,16 @@
 package com.substitutive.booksHub.domain.entities;
 
-import com.substitutive.booksHub.domain.exceptions.BookNotAvailableException;
 import com.substitutive.booksHub.domain.exceptions.BookNotFoundException;
 import com.substitutive.booksHub.domain.exceptions.UserNotFoundException;
 
 import java.time.LocalDate;
 
+/**
+ * Representa uma reserva de um livro no sistema Book Hub.
+ * Contém informações principais como um usuario que esta reservando e o livro a ser reservado.
+ * <p>
+ * Esta classe é usada em operações de cadastro, listagem, atualização e finalizacao de reserva.
+ */
 public class Reservation {
 
     private Long id;

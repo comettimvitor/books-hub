@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Caso de uso responsável por buscar todos os usuários do sistema.
+ *
+ * <p>Este caso de uso retorna uma lista de DTOs representando os usuários encontrados
+ * no repositório de domínio {@link UserDomainRepository}.
+ */
 @Service
 @RequiredArgsConstructor
 public class FindAllUsersUseCase {

@@ -13,7 +13,38 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementação da interface {@link BookDomainRepository} usando Spring Data JPA.
+ *
+ * <p>
+ * Esta classe atua como um adaptador da camada de infraestrutura no contexto da
+ * arquitetura hexagonal (ports & adapters). Seu papel é fazer a ponte entre
+ * o domínio e a persistência, garantindo que entidades JPA sejam convertidas
+ * para modelos de domínio e vice-versa.
+ * </p>
+ *
+ * <p>
+ * Todas as operações delegam o acesso ao banco de dados para {@link BookJpaRepository},
+ * enquanto {@link BookMapper} realiza as conversões necessárias.
+ * </p>
+ *
+ * <h2>Responsabilidades</h2>
+ * <ul>
+ *     <li>Persistir livros no banco de dados.</li>
+ *     <li>Consultar livros por diferentes critérios (ID, título, autor, ISBN etc.).</li>
+ *     <li>Atualizar dados de livros existentes.</li>
+ *     <li>Excluir livros.</li>
+ *     <li>Consultar estatísticas como livros mais emprestados.</li>
+ *     <li>Integrar com projections de consultas complexas.</li>
+ * </ul>
+ *
+ * <h2>Pontos de Atenção</h2>
+ * <ul>
+ *     <li>O método {@code update} lança {@link BookNotFoundException} caso o livro não exista.</li>
+ *     <li>As conversões para e a partir do domínio são sempre realizadas em {@link BookMapper}.</li>
+ *     <li>A validação de ISBN é garantida pelo value object {@link InternationalStandardBookNumber}.</li>
+ * </ul>
+ */
 @Repository
 @RequiredArgsConstructor
 public class BookJpaDomainRepositoryImpl implements BookDomainRepository {

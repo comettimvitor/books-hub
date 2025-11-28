@@ -9,7 +9,26 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Representa um usuário registrado no sistema.
+ *
+ * <p>Esta entidade é mapeada para a tabela {@code users} e contém informações
+ * pessoais, tipos de usuário e relacionamentos com empréstimos e reservas.</p>
+ *
+ * <p>Os principais dados armazenados são:</p>
+ * <ul>
+ *     <li>Nome do usuário;</li>
+ *     <li>CPF ({@link CPF});</li>
+ *     <li>E-mail ({@link Email});</li>
+ *     <li>Telefone ({@link Telephone});</li>
+ *     <li>Tipo de usuário ({@link UserType});</li>
+ * </ul>
+ *
+ * <p>Um usuário pode possuir múltiplos empréstimos ({@link LoanEntity}) e
+ * múltiplas reservas ({@link ReservationEntity}). Ambas coleções utilizam
+ * <code>cascade = CascadeType.ALL</code> e <code>orphanRemoval = true</code> para
+ * garantir sincronização adequada entre o domínio e o banco.</p>
+ */
 @Entity
 @Table(name = "users")
 @Getter

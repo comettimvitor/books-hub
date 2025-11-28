@@ -17,7 +17,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+/**
+ * Caso de uso responsável por criar um novo empréstimo de livros para um usuário.
+ *
+ * <p>Valida se o usuário existe e se os livros selecionados estão disponíveis.
+ * Se algum livro não estiver disponível, lança {@link BookNotAvailableException}.
+ * Se nenhum livro for encontrado, lança {@link BookNotFoundException}.
+ * Se o usuário não existir, lança {@link UserNotFoundException}.
+ */
 @Service
 @RequiredArgsConstructor
 public class CreateLoanUseCase {

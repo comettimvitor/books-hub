@@ -7,6 +7,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Caso de uso responsável por buscar usuários pelo nome.
+ *
+ * <p>Este caso de uso consulta o repositório de domínio {@link UserDomainRepository} para
+ * encontrar todos os usuários cujo nome corresponda ao informado. Retorna uma lista de
+ * {@link UserResponseDto} representando os usuários encontrados.
+ */
 @Service
 @RequiredArgsConstructor
 public class FindUserByNameUseCase {

@@ -6,6 +6,12 @@ import com.substitutive.booksHub.domain.valueobjects.CPF;
 import com.substitutive.booksHub.domain.valueobjects.Email;
 import com.substitutive.booksHub.domain.valueobjects.Telephone;
 
+/**
+ * DTO de resposta para informações de um usuário.
+ *
+ * <p>Utilizado para retornar dados de um usuário através das APIs, encapsulando
+ * informações essenciais da entidade de domínio {@link User}.
+ */
 public record UserResponseDto(
         Long id,
         String name,

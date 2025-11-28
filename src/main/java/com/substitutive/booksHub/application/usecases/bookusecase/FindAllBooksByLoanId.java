@@ -6,7 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Caso de uso responsável por buscar todos os livros associados a um determinado empréstimo.
+ *
+ * <p>Recebe o ID de um empréstimo e retorna a lista de livros relacionados a ele.
+ */
 @Service
 @RequiredArgsConstructor
 public class FindAllBooksByLoanId {

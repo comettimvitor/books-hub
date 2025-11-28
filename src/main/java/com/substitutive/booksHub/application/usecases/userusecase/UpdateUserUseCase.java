@@ -7,13 +7,21 @@ import com.substitutive.booksHub.domain.repositories.UserDomainRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * Caso de uso responsável por atualizar os dados de um usuário existente.
+ *
+ * <p>Este caso de uso verifica se já existe um usuário com o CPF informado antes de atualizar.
+ * Se o CPF já existir em outro usuário, lança uma {@link UserAlreadyExistsException}.
+ * Caso contrário, atualiza o usuário no repositório de domínio {@link UserDomainRepository}
+ * e retorna um {@link UserResponseDto} representando o usuário atualizado.
+ */
 @Service
 @RequiredArgsConstructor
 public class UpdateUserUseCase {
     private final UserDomainRepository userDomainRepository;
 
     public UserResponseDto execute(Long id, User user) {
-        if(userDomainRepository.existsByCpf(user.getCpf())) {
+        if (userDomainRepository.existsByCpf(user.getCpf())) {
             throw new UserAlreadyExistsException("A user with this CPF already exists.");
         }
 

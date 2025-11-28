@@ -11,7 +11,20 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementação do {@link UserDomainRepository} utilizando Spring Data JPA.
+ * <p>
+ * Atua como adaptador entre o domínio e a camada de persistência,
+ * convertendo objetos de domínio em entidades JPA e vice-versa
+ * utilizando o {@link UserMapper}.
+ * </p>
+ *
+ * <p>
+ * Responsável por operações de persistência e consulta de usuários,
+ * incluindo criação, atualização, exclusão e verificações específicas
+ * como existência por CPF.
+ * </p>
+ */
 @Repository
 @RequiredArgsConstructor
 public class UserJpaDomainRepositoryImpl implements UserDomainRepository {
@@ -59,7 +72,7 @@ public class UserJpaDomainRepositoryImpl implements UserDomainRepository {
     public void delete(Long id) {
         var user = userJpaRepository.findById(id);
 
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             throw new UserNotFoundException("User not found with id: " + id);
         }
 

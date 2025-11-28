@@ -5,7 +5,11 @@ import com.substitutive.booksHub.domain.exceptions.BookNotFoundException;
 import com.substitutive.booksHub.domain.repositories.BookDomainRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+/**
+ * Caso de uso responsável por buscar um livro pelo seu ID.
+ *
+ * <p>Se o livro não for encontrado, lança uma exceção {@link com.substitutive.booksHub.domain.exceptions.BookNotFoundException}.
+ */
 @Service
 @RequiredArgsConstructor
 public class FindBookByIdUseCase {

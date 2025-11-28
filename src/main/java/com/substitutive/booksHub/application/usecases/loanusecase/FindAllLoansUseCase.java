@@ -6,7 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Caso de uso responsável por buscar todos os empréstimos existentes no sistema.
+ *
+ * <p>Retorna uma lista de DTOs de resposta ({@link LoanResponseDto}) contendo todos os empréstimos
+ * registrados no sistema.
+ */
 @Service
 @RequiredArgsConstructor
 public class FindAllLoansUseCase {

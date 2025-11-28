@@ -9,7 +9,14 @@ import com.substitutive.booksHub.domain.repositories.BookDomainRepository;
 import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNumber;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+/**
+ * Caso de uso responsável por criar um novo livro no sistema.
+ *
+ * <p>Este caso de uso verifica se o ISBN informado já existe no repositório.
+ * Caso exista, lança uma {@link IsbnAlreadyExistsException}. Caso contrário,
+ * cria um novo livro com status {@link com.substitutive.booksHub.domain.enums.BookStatus#AVAILABLE}
+ * e disponível para empréstimos.
+ */
 @Service
 @RequiredArgsConstructor
 public class CreateBookUseCase {

@@ -6,7 +6,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.substitutive.booksHub.domain.valueobjects.Telephone;
 
 import java.io.IOException;
-
+/**
+ * Desserializador personalizado para o Value Object {@link Telephone}.
+ * <p>
+ * Esta classe define como uma String presente no JSON deve ser convertida
+ * em uma instância de {@link Telephone} durante o processo de desserialização
+ * realizado pelo Jackson.
+ */
 public class TelephoneDeserializer extends JsonDeserializer<Telephone> {
 
     @Override

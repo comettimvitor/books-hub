@@ -8,7 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Repositório JPA responsável pelo acesso e manipulação de dados da entidade {@link BookEntity}.
+ * <p>
+ * Contém consultas derivadas do Spring Data, além de consultas nativas utilizadas
+ * para operações mais específicas relacionadas a empréstimos, reservas e estatísticas.
+ */
 public interface BookJpaRepository extends JpaRepository<BookEntity, Long> {
     Optional<BookEntity> findByTitle(String title);
 

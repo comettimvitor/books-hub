@@ -5,7 +5,11 @@ import com.substitutive.booksHub.domain.enums.UserType;
 import com.substitutive.booksHub.domain.valueobjects.CPF;
 import com.substitutive.booksHub.domain.valueobjects.Email;
 import com.substitutive.booksHub.domain.valueobjects.Telephone;
-
+/**
+ * DTO de requisição para criação ou atualização de um usuário.
+ *
+ * <p>Contém informações necessárias para criar ou atualizar um usuário no sistema.
+ */
 public record UserRequestDto(
         String name,
         CPF cpf,

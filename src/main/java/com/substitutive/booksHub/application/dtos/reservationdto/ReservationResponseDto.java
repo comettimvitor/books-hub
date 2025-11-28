@@ -5,7 +5,12 @@ import com.substitutive.booksHub.application.dtos.userdto.UserResponseDto;
 import com.substitutive.booksHub.domain.entities.Reservation;
 
 import java.time.LocalDate;
-
+/**
+ * DTO de resposta para uma reserva de livro.
+ *
+ * <p>Contém informações sobre a reserva, o usuário que a realizou,
+ * o livro reservado e a data da reserva.
+ */
 public record ReservationResponseDto(
         Long id,
         UserResponseDto user,

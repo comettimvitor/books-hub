@@ -13,7 +13,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * Caso de uso responsável por finalizar a devolução de um empréstimo.
+ *
+ * <p>Este caso de uso realiza as seguintes ações:
+ * <ul>
+ *     <li>Recupera todos os livros associados ao empréstimo informado;</li>
+ *     <li>Marca cada livro como disponível e atualiza seu estado no repositório;</li>
+ *     <li>Atualiza o status do empréstimo para devolvido, se estiver em andamento;</li>
+ *     <li>Retorna um {@link LoanResponseDto} com as informações atualizadas do empréstimo.</li>
+ * </ul>
+ *
+ * <p>Caso o empréstimo não seja encontrado, lança uma exceção {@link LoanNotFoundException}.
+ */
 @Service
 @RequiredArgsConstructor
 public class ReturnLoanUseCase {

@@ -8,7 +8,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+/**
+ * Implementação do {@link ReservationDomainRepository} utilizando Spring Data JPA.
+ * <p>
+ * Atua como adaptador entre o domínio e a camada de persistência,
+ * realizando a conversão entre objetos de domínio e entidades JPA
+ * por meio do {@link ReservationMapper}.
+ * </p>
+ *
+ * <p>
+ * Responsável por salvar e consultar reservas de livros no banco de dados.
+ * </p>
+ */
 @Repository
 @RequiredArgsConstructor
 public class ReservationJpaDomainRepositoryImpl implements ReservationDomainRepository {

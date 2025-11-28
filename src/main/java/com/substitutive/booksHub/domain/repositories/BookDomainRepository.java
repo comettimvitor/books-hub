@@ -7,7 +7,16 @@ import com.substitutive.booksHub.domain.valueobjects.InternationalStandardBookNu
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Repositório de acesso ao domínio de livros.
+ *
+ * <p>
+ * Define as operações essenciais para persistência, consulta e estatísticas relacionadas
+ * à entidade {@link Book} dentro do contexto do domínio do sistema BookHub.
+ * Esta interface segue princípios de DDD, fornecendo uma abstração para o acesso
+ * ao armazenamento sem expor detalhes de implementação.
+ * </p>
+ */
 public interface BookDomainRepository {
     Book save(Book book);
 

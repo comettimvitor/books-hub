@@ -1,6 +1,5 @@
 package com.substitutive.booksHub.application.usecases.reservationusecase;
 
-import ch.qos.logback.core.joran.conditional.IfAction;
 import com.substitutive.booksHub.application.dtos.reservationdto.ReservationRequestDto;
 import com.substitutive.booksHub.application.dtos.reservationdto.ReservationResponseDto;
 import com.substitutive.booksHub.domain.entities.Book;
@@ -16,6 +15,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Caso de uso responsável por criar uma reserva de livro para um usuário.
+ *
+ * <p>Este caso de uso realiza as seguintes ações:
+ * <ul>
+ *     <li>Valida se o usuário existe, caso contrário lança {@link UserNotFoundException};</li>
+ *     <li>Valida se o livro existe, caso contrário lança {@link BookNotFoundException};</li>
+ *     <li>Verifica se o livro está disponível para reserva, caso contrário lança {@link BookNotAvailableException};</li>
+ *     <li>Cria a reserva no repositório e marca o livro como reservado;</li>
+ *     <li>Retorna um {@link ReservationResponseDto} com os dados da reserva criada.</li>
+ * </ul>
+ */
 @Service
 @RequiredArgsConstructor
 public class CreateReservationUserCase {

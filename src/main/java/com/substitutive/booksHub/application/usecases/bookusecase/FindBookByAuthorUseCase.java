@@ -6,7 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Caso de uso responsável por buscar livros de um determinado autor.
+ *
+ * <p>Retorna todos os livros que correspondem ao autor informado.
+ */
 @Service
 @RequiredArgsConstructor
 public class FindBookByAuthorUseCase {

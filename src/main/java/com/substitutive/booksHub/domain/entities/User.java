@@ -5,6 +5,12 @@ import com.substitutive.booksHub.domain.valueobjects.CPF;
 import com.substitutive.booksHub.domain.valueobjects.Email;
 import com.substitutive.booksHub.domain.valueobjects.Telephone;
 
+/**
+ * Representa um usuario no sisteema Book Hub.
+ * Contem informacoes do usuario como nome, cpf, email, telefone etipo do usuario.
+ * <p>
+ * Esta classe e usada em operacoes de cadastro, listagem, atualizacao e delecao de usuarios.
+ */
 public class User {
 
     private Long id;
@@ -69,13 +75,5 @@ public class User {
 
     public UserType getUserType() {
         return userType;
-    }
-
-    public void setUserTypeAsStudent() {
-        this.userType = UserType.STUDENT;
-    }
-
-    public void setUserTypeAsBookstoreMember() {
-        this.userType = UserType.BOOKSTORE_MEMBER;
     }
 }

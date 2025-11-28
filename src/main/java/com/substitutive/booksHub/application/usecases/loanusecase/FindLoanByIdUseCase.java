@@ -6,7 +6,12 @@ import com.substitutive.booksHub.domain.repositories.LoanDomainRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+/**
+ * Caso de uso responsável por buscar um empréstimo específico pelo seu ID.
+ *
+ * <p>Retorna um DTO de resposta ({@link LoanResponseDto}) contendo as informações do empréstimo
+ * solicitado. Caso o empréstimo não seja encontrado, lança uma exceção {@link LoanNotFoundException}.
+ */
 @Service
 @RequiredArgsConstructor
 public class FindLoanByIdUseCase {

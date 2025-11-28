@@ -6,6 +6,13 @@ import com.substitutive.booksHub.domain.repositories.UserDomainRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * Caso de uso responsável por buscar um usuário pelo seu ID.
+ *
+ * <p>Este caso de uso consulta o repositório de domínio {@link UserDomainRepository} para
+ * encontrar o usuário pelo ID fornecido. Caso o usuário não seja encontrado,
+ * lança a exceção {@link UserNotFoundException}.
+ */
 @Service
 @RequiredArgsConstructor
 public class FindUserByIdUseCase {

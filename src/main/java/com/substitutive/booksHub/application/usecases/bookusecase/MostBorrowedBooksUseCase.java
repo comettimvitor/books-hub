@@ -6,7 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Caso de uso responsável por recuperar os livros mais emprestados.
+ *
+ * <p>Retorna uma lista dos livros com maior número de empréstimos, ordenada do mais para o menos emprestado.
+ */
 @Service
 @RequiredArgsConstructor
 public class MostBorrowedBooksUseCase {

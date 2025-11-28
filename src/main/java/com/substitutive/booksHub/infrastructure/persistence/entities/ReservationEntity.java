@@ -7,7 +7,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-
+/**
+ * Representa uma reserva de livro feita por um usuário no sistema.
+ *
+ * <p>Esta entidade é mapeada para a tabela {@code reservations} e contém:
+ * <ul>
+ *     <li>O usuário que realizou a reserva ({@link UserEntity});</li>
+ *     <li>O livro reservado ({@link BookEntity});</li>
+ *     <li>A data em que a reserva foi efetuada.</li>
+ * </ul>
+ *
+ * <p>Cada livro só pode ter uma reserva ativa por vez, sendo refletido pela
+ * restrição {@code unique = true} na coluna {@code book_id}.
+ */
 @Entity
 @Table(name = "reservations")
 @Getter
